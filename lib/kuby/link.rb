@@ -1,5 +1,7 @@
 require 'multi_json'
 require 'excon'
+require 'kuby/link/api_map'
+require 'kuby/query'
 require 'kuby/link/api_methods'
 require 'kuby/link/flight_methods'
 require 'kuby/link/navball_methods'
@@ -10,7 +12,7 @@ require 'kuby/link/vessel_methods'
 class Kuby::Link
   MIN_TELEMACHUS_VERSION = Gem::Version.new('1.4.6.0')
 
-  attr_reader :host, :port
+  attr_reader :host, :port, :query
 
   include Kuby::Link::ApiMethods
   include Kuby::Link::FlightMethods
@@ -19,7 +21,7 @@ class Kuby::Link
   include Kuby::Link::ResourceMethods
   include Kuby::Link::VesselMethods
 
-  def initialize(options={})
+  def initialize(options = {})
     @host = options.fetch(:host, '127.0.0.1')
     @port = options.fetch(:port, 8085).to_i
     @path = 'telemachus/datalink'
@@ -29,27 +31,51 @@ class Kuby::Link
     # Raise error when the telemachus version is not supported, this also automatically
     # checks if the connection can be made
     unless supported_version?
-      raise Kuby::UnsupportedTelemachusVersion.new("Please install Telemachus #{MIN_TELEMACHUS_VERSION} or higher")
+      fail Kuby::UnsupportedTelemachusVersion.new("Please install Telemachus #{MIN_TELEMACHUS_VERSION} or higher")
     end
 
     true
   end
 
+  def set(*args)
+    chain_set(*args)
+  end
+
+  def get(*args)
+    chain_get(*args)
+  end
+
   private
 
   def api_set(ret, *args)
-    api_get("#{ret}[#{args.join(',')}]")
+    call("r=#{ret}[#{args.join(',')}]")[:r]
   end
 
   def api_get(ret)
-    # All Telemachus api methods are GET, the api command is passed in as the 'ret' parameter,
-    # the returned result is in the form of: {"ret":"<value>"}
-    res = Excon.get(uri, { tcp_nodelay: true, query: "ret=#{ret}" })
+    call("r=#{ret}")[:r]
+  end
+
+  # chain(:pitch, :yaw, :roll)
+  def chain_set(*args)
+    @query ||= Kuby::Query.new(self)
+    @query.set(*args)
+    @query
+  end
+
+  # chain(:pitch, :yaw, :roll)
+  def chain_get(*args)
+    @query ||= Kuby::Query.new(self)
+    @query.get(*args)
+    @query
+  end
+
+  def call(query_string)
+    res = Excon.get(uri, tcp_nodelay: true, query: query_string)
 
     # Parse the result
     data = MultiJson.load(res.body, symbolize_keys: true)
 
-    data[:ret]
+    data
   rescue Excon::Errors::SocketError, Errno::ECONNREFUSED
     # Catch different kinds of connection refused and raise custom exception
     raise Kuby::TelemachusConnectionRefused

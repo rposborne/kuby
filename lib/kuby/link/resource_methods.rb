@@ -1,7 +1,6 @@
 module Kuby
   class Link
     module ResourceMethods
-
       def resource(type)
         api_set('r.resource', type).to_f
       end

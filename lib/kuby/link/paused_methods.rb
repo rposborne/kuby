@@ -14,7 +14,7 @@ module Kuby
       private
 
       def pause_value
-        api_get('p.paused').to_i
+        api_get(API_MAP[:pause_value]).to_i
       end
     end
   end

@@ -73,43 +73,43 @@ module Kuby
       # Retrograde
       # Not Plotable
 
-      normalplus: 'mj.normalplus',
+      normal_plus: 'mj.normalplus',
       # Normal Plus
       # Not Plotable
 
-      normalminus: 'mj.normalminus',
+      normal_minus: 'mj.normalminus',
       # Normal Minus
       # Not Plotable
 
-      radialplus: 'mj.radialplus',
+      radial_plus: 'mj.radialplus',
       # Radial Plus
       # Not Plotable
 
-      radialminus: 'mj.radialminus',
+      radial_minus: 'mj.radialminus',
       # Radial Minus
       # Not Plotable
 
-      targetplus: 'mj.targetplus',
+      target_plus: 'mj.targetplus',
       # Target Plus
       # Not Plotable
 
-      targetminus: 'mj.targetminus',
+      target_minus: 'mj.targetminus',
       # Target Minus
       # Not Plotable
 
-      relativeplus: 'mj.relativeplus',
+      relative_plus: 'mj.relativeplus',
       # Relative Plus
       # Not Plotable
 
-      relativeminus: 'mj.relativeminus',
+      relative_minus: 'mj.relativeminus',
       # Relative Minus
       # Not Plotable
 
-      parallelplus: 'mj.parallelplus',
+      parallel_plus: 'mj.parallelplus',
       # Parallel Plus
       # Not Plotable
 
-      parallelminus: 'mj.parallelminus',
+      parallel_minus: 'mj.parallelminus',
       # Parallel Minus
       # Not Plotable
 

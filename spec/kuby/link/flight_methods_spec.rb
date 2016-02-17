@@ -48,15 +48,15 @@ describe Kuby::Link::FlightMethods do
       it 'normalizes to 1.0' do
         expect(subject).to receive(:api_set).with('v.setPitch', 1.0)
 
-        subject.pitch=370
+        subject.pitch = 370
       end
     end
 
     context 'throttle is not a float or int' do
       it 'raises an ArgumentError' do
-        expect {
-          subject.pitch='a'
-        }.to raise_error ArgumentError
+        expect do
+          subject.pitch = 'a'
+        end.to raise_error ArgumentError
       end
     end
 
@@ -71,9 +71,9 @@ describe Kuby::Link::FlightMethods do
 
   describe '#pitch_yaw_roll_xyz' do
     it 'implements the v.setPitchYawRollXYZ call' do
-      expect(subject).to receive(:api_set).with('v.setPitchYawRollXYZ', [0.5, 0.5, 0.5, 0.5, 0.5, 0.5] )
+      expect(subject).to receive(:api_set).with('v.setPitchYawRollXYZ', [0.5, 0.5, 0.5, 0.5, 0.5, 0.5])
 
-      subject.pitch_yaw_roll_xyz = { pitch:90.0, yaw:90.0, roll:90.0, x:0.5, y:0.5, z:0.5}
+      subject.pitch_yaw_roll_xyz = { pitch: 90.0, yaw: 90.0, roll: 90.0, x: 0.5, y: 0.5, z: 0.5 }
     end
 
     context 'pitch is larger than 180' do
@@ -86,17 +86,17 @@ describe Kuby::Link::FlightMethods do
 
     context 'pitch is not a float or int' do
       it 'raises an ArgumentError' do
-        expect {
-          subject.pitch_yaw_roll_xyz = {pitch:'a', yaw:'a', roll:'a', x:'a', y:'a', z:'a'}
-        }.to raise_error ArgumentError
+        expect do
+          subject.pitch_yaw_roll_xyz = { pitch: 'a', yaw: 'a', roll: 'a', x: 'a', y: 'a', z: 'a' }
+        end.to raise_error ArgumentError
       end
     end
 
     context 'pitch is smaller than 0' do
       it 'normalizes to 0.0' do
-        expect(subject).to receive(:api_set).with('v.setPitchYawRollXYZ', [-0.75,-0.75,-0.75,0,0,0])
+        expect(subject).to receive(:api_set).with('v.setPitchYawRollXYZ', [-0.75, -0.75, -0.75, 0, 0, 0])
 
-        subject.pitch_yaw_roll_xyz = {pitch:-135.0, yaw:-135.0, roll:-135.0, x:-0.4, y:-0.4, z:-0.4}
+        subject.pitch_yaw_roll_xyz = { pitch: -135.0, yaw: -135.0, roll: -135.0, x: -0.4, y: -0.4, z: -0.4 }
       end
     end
   end
@@ -118,9 +118,9 @@ describe Kuby::Link::FlightMethods do
 
     context 'throttle is not a float or int' do
       it 'raises an ArgumentError' do
-        expect {
+        expect do
           subject.set_throttle('a')
-        }.to raise_error ArgumentError
+        end.to raise_error ArgumentError
       end
     end
 

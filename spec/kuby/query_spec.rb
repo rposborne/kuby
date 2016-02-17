@@ -35,20 +35,20 @@ describe Kuby::Query do
   describe '#set' do
     it 'sets set keys' do
       subject.set(roll: 90)
-      expect(subject.set_queries).to eq({roll: 90})
+      expect(subject.set_queries).to eq(roll: 90)
     end
 
     it 'can be chained' do
       subject.set(roll: 90)
       subject.set(yaw: 90)
-      expect(subject.set_queries).to eq({roll: 90, yaw: 90})
+      expect(subject.set_queries).to eq(roll: 90, yaw: 90)
     end
 
     it 'is chained in the order it is merged' do
       subject.set(roll: 90)
       subject.set(yaw: 90)
       subject.set(roll: 40)
-      expect(subject.set_queries).to eq({roll: 40, yaw: 90})
+      expect(subject.set_queries).to eq(roll: 40, yaw: 90)
     end
   end
 end

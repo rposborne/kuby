@@ -13,7 +13,7 @@ describe Kuby::Link::ResourceMethods do
 
   describe '#resource' do
     it 'implements the r.resource[LiquidFuel] call' do
-      expect(subject).to receive(:api_set).with("r.resource", "LiquidFuel")
+      expect(subject).to receive(:api_set).with('r.resource', 'LiquidFuel')
 
       subject.resource('LiquidFuel')
     end

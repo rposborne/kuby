@@ -1,7 +1,7 @@
 module Kuby
   class Link
     module PausedMethods
-      PAUSE_STATES = [:not_paused, :flight_paused, :out_of_power, :antenna_disabled, :vessel_wo_antenna, :unknown_pause_state]
+      PAUSE_STATES = [:not_paused, :flight_paused, :out_of_power, :antenna_disabled, :vessel_wo_antenna, :unknown_pause_state].freeze
 
       def paused?
         pause_value > 0

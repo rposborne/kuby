@@ -4,19 +4,19 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'kuby/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "kuby"
+  gem.name          = 'kuby'
   gem.version       = Kuby::VERSION
-  gem.authors       = ["Ralph Rooding"]
-  gem.email         = ["ralph@izerion.com"]
-  gem.description   = %q{Crash your Kerbals using Ruby!}
-  gem.summary       = %q{Crash your Kerbals using Ruby!}
-  gem.homepage      = "https://github.com/rrooding/kuby"
+  gem.authors       = ['Ralph Rooding']
+  gem.email         = ['ralph@izerion.com']
+  gem.description   = 'Crash your Kerbals using Ruby!'
+  gem.summary       = 'Crash your Kerbals using Ruby!'
+  gem.homepage      = 'https://github.com/rrooding/kuby'
   gem.license       = 'MIT'
 
-  gem.files         = `git ls-files`.split($/)
-  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  gem.files         = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
+  gem.executables   = gem.files.grep(%r{^bin/}).map { |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.require_paths = ["lib"]
+  gem.require_paths = ['lib']
 
   gem.add_dependency 'excon'
   gem.add_dependency 'multi_json'

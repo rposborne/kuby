@@ -5,6 +5,7 @@ module Kuby
       @link = link
       @get_queries = []
       @set_queries = {}
+      @query_mapping = {}
     end
 
     def get(*array)
@@ -18,14 +19,7 @@ module Kuby
     end
 
     def call
-      data = @link.__send__(:call, build_string_query)
-
-      friendly_data = {}
-      queries.each_with_index.each do |h, i|
-        friendly_data[h[0]] = data.fetch(i.to_s.to_sym)
-      end
-      clear_query!
-      friendly_data
+      @link.__send__(:call, build_string_query)
     end
 
     #
